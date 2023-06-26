@@ -33,7 +33,7 @@
           />
         </div>
       </div>
-      {{ exampleStore }}
+
       <sub-nav v-if="isLoggedIn" data-test="subnav"></sub-nav>
     </div>
   </header>
@@ -43,7 +43,7 @@ import { mapState, mapMutations } from "vuex";
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import ProfileImage from "@/components/Navigation/ProfileImage.vue";
 import SubNav from "@/components/Navigation/SubNav.vue";
-import { LOGIN_USER } from "@/store/index.js";
+import { LOGIN_USER } from "@/store/constants";
 export default {
   name: "MainNav",
   components: {
@@ -56,7 +56,7 @@ export default {
       url: "https://careers.google.com",
       company: "Google Careers",
       menuItems: [
-        { name: "Teams", url: "/" },
+        { name: "Teams", url: "/teams" },
         { name: "Location", url: "/" },
         { name: "Life at Bobo Corp", url: "/" },
         { name: "How we hire", url: "/" },

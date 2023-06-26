@@ -1,4 +1,4 @@
-import { state, mutations } from "@/store/index";
+import { state, mutations } from "@/store";
 describe("State", () => {
   it("keeps track of whether user is logged in ", () => {
     const startingState = state();

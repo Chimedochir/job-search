@@ -26,18 +26,21 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import { mapState, mapActions, mapGetters } from "vuex";
+import { FETCH_JOBS } from "@/store/constants";
 import JobListing from "./JobListing.vue";
+import { FILTERED_JOBS } from "@/store/constants";
 export default {
   name: "JobListings",
   components: {
     JobListing,
   },
-  data() {
-    return {
-      jobs: [],
-    };
-  },
+  // data() {
+  //   return {
+  //     jobs: [],
+  //   };
+  // },
   computed: {
     currentPage() {
       const pageString = this.$route.query.page || "1";
@@ -50,7 +53,7 @@ export default {
     },
     nextPage() {
       const nextPage = this.currentPage + 1;
-      const maxPage = Math.ceil(this.jobs.length / 10);
+      const maxPage = Math.ceil(this.FILTERED_JOBS.length / 10);
       return nextPage <= maxPage ? nextPage : undefined;
     },
 
@@ -59,14 +62,21 @@ export default {
       const firstJobIndex = (pageNumber - 1) * 10;
       const lastJobIndex = pageNumber * 10;
 
-      return this.jobs.slice(firstJobIndex, lastJobIndex);
+      return this.FILTERED_JOBS.slice(firstJobIndex, lastJobIndex);
     },
+    ...mapState(["isLoggedIn"]),
+    ...mapGetters([FILTERED_JOBS]),
   },
 
   async mounted() {
-    const baseUrl = process.env.VUE_APP_API_URL;
-    const response = await axios.get(`${baseUrl}/jobs`);
-    this.jobs = response.data;
+    // const baseUrl = process.env.VUE_APP_API_URL;
+    // const response = await axios.get(`${baseUrl}/jobs`);
+    // this.jobs = response.data;
+    this.FETCH_JOBS();
+    // this.$store.dispatch(FETCH_JOBS);
+  },
+  methods: {
+    ...mapActions([FETCH_JOBS]),
   },
 };
 </script>

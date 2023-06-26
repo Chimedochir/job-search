@@ -1,15 +1,26 @@
-const axios = require("axios");
-const url = "http://localhost:3000/jobs";
+// const numbers = [1, 2, 3, 5, 8, 45, 4];
+// const num = [91, 92];
+// numbers.filter((number) => num.includes(number));
+// console.log(numbers);
+// console.log(num);
+// let text = "Hello world, welcome to the universe.";
 
-const playJob1 = async () => {
-  await axios.get(url).then((response) => {
-    console.log(response);
-  });
-};
-playJob1();
-const playJob2 = () => {
-  const response = axios.get(url);
-  console.log(response);
-};
-
-playJob2();
+// let result = text.includes("world");
+// console.log(result);
+const { computed, reactive, toRef } = require("vue");
+// let a = ref(1);
+// let b = ref(2);
+// let c = computed(() => a.value + b.value);
+// console.log(c.value);
+// a.value = 10;
+// console.log(c.value);
+const person = reactive({ firstName: "Bat", lastName: "Suren" });
+const firstName = toRef(person, "firstName");
+const lastName = toRef(person, "lastName");
+const title = computed(() => `${firstName.value} ${lastName.value} the Great`);
+console.log(title.value);
+// const title = computed(
+//   () => `${person.firstName} ${person.lastName} the Great`
+// );
+person.firstName = "Bold";
+console.log(title.value);
